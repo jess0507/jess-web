@@ -12,15 +12,15 @@ export function NavItem({ title, isSelected, onClick }: NavItemProps) {
       onClick={onClick}
       className="group relative flex h-full w-[120px] items-center justify-center"
     >
-      <span className="font-mono text-base font-bold text-ink">{title}</span>
-      {/* 底部指示條:選取時恆顯示,否則 hover 展開 */}
-      <span
-        className={`absolute bottom-3 left-1/2 h-1.5 -translate-x-1/2 bg-yellow450 transition-all duration-300 ${
-          isSelected
-            ? 'w-[120px] opacity-85'
-            : 'w-0 opacity-85 group-hover:w-[120px]'
-        }`}
-      />
+      <span className="relative font-mono text-base font-bold text-ink">
+        {title}
+        {/* 底部指示條:寬度對齊文字,選取時恆顯示,否則 hover 展開 */}
+        <span
+          className={`absolute -bottom-2 left-0 h-0.5 rounded-sm bg-black transition-all duration-300 ${
+            isSelected ? 'w-full opacity-85' : 'w-0 opacity-85 group-hover:w-full'
+          }`}
+        />
+      </span>
     </button>
   );
 }
