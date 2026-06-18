@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface font-sans text-text2 antialiased;
+  }
+}
+
+@layer utilities {
+  /* 打字機游標(對應 AnimatedTextKit 的 cursor) */
+  .typewriter-caret::after {
+    content: '|';
+    @apply ml-0.5 font-normal;
+    animation: caret-blink 1s step-end infinite;
+  }
+
+  @keyframes caret-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+}
