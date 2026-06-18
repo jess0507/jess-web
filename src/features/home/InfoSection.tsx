@@ -11,11 +11,11 @@ export function InfoSection() {
 
   return (
     <div className="flex flex-col items-start">
-      <div className="flex h-44 items-start md:h-40">
+      <div className="flex h-44 items-start pt-20 md:h-40">
         <HelloText />
       </div>
 
-      <p className="mt-8 whitespace-pre-line text-base leading-[2] text-text2">
+      <p className="mt-4 whitespace-pre-line text-base leading-[2] text-text2">
         {t.aboutDev}
       </p>
 
