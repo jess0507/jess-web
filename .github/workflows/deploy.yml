@@ -22,6 +22,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # 預渲染(scripts/prerender.mjs)需要 puppeteer 的 Chromium;快取以加速 CI
+      - name: Cache Puppeteer browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/puppeteer
+          key: puppeteer-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
+      # 確保 Chromium 已安裝(已快取則為 no-op),避免 build 時預渲染失敗
+      - name: Ensure Puppeteer browser
+        run: npx puppeteer browsers install chrome
+
       - name: Build
         env:
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}

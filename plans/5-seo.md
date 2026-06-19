@@ -33,14 +33,14 @@
 
 **部署後(外部設定)**
 
-- [ ] Google Search Console 加入網站 + 提交 `sitemap.xml`
+- [x] Google Search Console 加入網站 + 提交 `sitemap.xml`
 - [ ] FB Sharing Debugger / LINE 實測 og 卡片
 - [ ] **若綁自訂網域**:同步更新網址於 `index.html`(canonical / og:url / og:image / JSON-LD url)、`public/robots.txt`、`public/sitemap.xml`
 
 **Part B — 解決「正文不在 HTML」(未做,視需求)**
 
 - [x] **B1(b) 靜態資料** — `src/data/portfolio.json`(寫死 portfolio 內容)+ `portfolioRepository.ts` 的 `loadPortfolioStatic()`;`PortfolioContext` 改用它。Firestore 版 `loadPortfolio` 仍保留(目前未被打包,tree-shaken)。首屏即有資料、bundle 變小。
-- [ ] **B1(a) 預渲染** — 用 `vite-plugin-prerender` / puppeteer 把渲染後 DOM 寫進 `index.html`,讓不跑 JS 的爬蟲也看得到正文(資料已靜態化,這步變單純)
+- [x] **B1(a) 預渲染** — `scripts/prerender.mjs`(puppeteer + `vite preview`):build 後跑頁面,把 React 渲染完成的 DOM 寫回 `dist/index.html`,讓不跑 JS 的爬蟲也看得到正文。`package.json` 的 `build` 改為 `tsc && vite build && npm run prerender`。已驗證:`dist/index.html` 3.1KB → 21.7KB,含 `<h1>` 姓名、專案 `<img alt>`、技能 `<h3>`,head meta/JSON-LD 完整保留。
   - (未來若想自動同步 Firestore → JSON:新增 `scripts/fetch-portfolio.ts` 用 firebase-admin 拉資料寫進 `src/data/portfolio.json`,接到 build / CI)
 - [ ] **B2 react-helmet-async** — 動態 head(拆多路由後才必要)
 
