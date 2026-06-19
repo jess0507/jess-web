@@ -6,7 +6,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { loadPortfolio } from './portfolioRepository';
+import { loadPortfolioStatic } from './portfolioRepository';
 import { emptyPortfolio, type PortfolioData } from './types';
 
 interface PortfolioState {
@@ -20,7 +20,7 @@ interface PortfolioState {
 const PortfolioContext = createContext<PortfolioState | null>(null);
 
 /**
- * 持有 portfolio 顯示資料,掛載時自動從 Firestore 載入。
+ * 持有 portfolio 顯示資料,掛載時從靜態 JSON 載入。
  * 對應 Flutter 的 portfolioProvider(AsyncNotifier)。
  */
 export function PortfolioProvider({ children }: { children: ReactNode }) {
@@ -32,7 +32,7 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
     setLoading(true);
     setError(null);
     try {
-      setData(await loadPortfolio());
+      setData(await loadPortfolioStatic());
     } catch (e) {
       setError(e instanceof Error ? e : new Error(String(e)));
     } finally {

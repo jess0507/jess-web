@@ -15,6 +15,37 @@
 
 ---
 
+## ✅ 進度 Checklist(含檔案位置)
+
+> 狀態:`[x]` 完成 / `[ ]` 待辦 / `[~]` 需手動補
+
+**Part A — 靜態 SEO(已實作,build 已驗證)**
+
+- [x] **A1 meta + OG/Twitter** — `index.html`(title / description / author / keywords / canonical / Open Graph / Twitter Card)
+- [x] **A2 robots.txt** — `public/robots.txt`(允許全爬 + 指向 sitemap)
+- [x] **A3 sitemap.xml** — `public/sitemap.xml`(單頁,`lastmod` = 2026-06-18)
+- [x] **A4 JSON-LD(Person)** — `index.html`(`<script type="application/ld+json">`)
+- [x] **manifest.json**(PWA 資訊,參考 game-web)— `public/manifest.json`,於 `index.html` 以 `<link rel="manifest">` 引用
+- [x] **og 預覽圖** — `public/og-image.png`(已加入,1200×630 PNG;meta 已指向 `/og-image.png`)
+- [x] **JSON-LD `sameAs`** — `index.html`(已填 GitHub `jess0507` / LinkedIn 真實連結)
+- [x] **A5 語意 HTML + 圖片 alt** — `<main>`(`ScaffoldWithNav.tsx`)、`<nav>`/`<header>`(`WebNavigationBar.tsx`、`MobileNav.tsx`)、`<section>`(`HomePage.tsx`)、`<h2>`(`NimbusInfoSection.tsx`)、`<h3>`(`SkillSection.tsx`)、`<img alt={title}>`(`ProjectItem.tsx`)皆已具備;最後補上唯一 `<h1>`(`HelloText.tsx` 以 `sr-only` 放姓名+職稱,打字機動畫 `aria-hidden`)
+- [x] **A6 部署驗證** — `npm run build && firebase deploy --only hosting`,確認 `/robots.txt`、`/sitemap.xml` 可開啟
+
+**部署後(外部設定)**
+
+- [ ] Google Search Console 加入網站 + 提交 `sitemap.xml`
+- [ ] FB Sharing Debugger / LINE 實測 og 卡片
+- [ ] **若綁自訂網域**:同步更新網址於 `index.html`(canonical / og:url / og:image / JSON-LD url)、`public/robots.txt`、`public/sitemap.xml`
+
+**Part B — 解決「正文不在 HTML」(未做,視需求)**
+
+- [x] **B1(b) 靜態資料** — `src/data/portfolio.json`(寫死 portfolio 內容)+ `portfolioRepository.ts` 的 `loadPortfolioStatic()`;`PortfolioContext` 改用它。Firestore 版 `loadPortfolio` 仍保留(目前未被打包,tree-shaken)。首屏即有資料、bundle 變小。
+- [ ] **B1(a) 預渲染** — 用 `vite-plugin-prerender` / puppeteer 把渲染後 DOM 寫進 `index.html`,讓不跑 JS 的爬蟲也看得到正文(資料已靜態化,這步變單純)
+  - (未來若想自動同步 Firestore → JSON:新增 `scripts/fetch-portfolio.ts` 用 firebase-admin 拉資料寫進 `src/data/portfolio.json`,接到 build / CI)
+- [ ] **B2 react-helmet-async** — 動態 head(拆多路由後才必要)
+
+---
+
 ## 成效量化總覽(先看這張)
 
 > ⚠️ 說明:SEO **沒有保證的排名數字**(排名還受外部連結、競爭者、Google 演算法影響)。

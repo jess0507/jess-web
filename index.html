@@ -2,19 +2,72 @@
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="apple-touch-icon" href="/logo.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- 基本 SEO -->
+    <title>Jess Yen 個人網站 | Senior Android &amp; Flutter Engineer</title>
     <meta
       name="description"
-      content="Jess Yen 個人網站 — Senior Android & Flutter Engineer"
+      content="Jess Yen 個人網站 — 擁有 7 年行動應用開發經驗的 Senior Android & Flutter Engineer,作品包含 7 款已上架 Google Play 的 App。"
     />
+    <meta name="author" content="Jess Yen" />
+    <meta
+      name="keywords"
+      content="Jess Yen, Android Engineer, Flutter Engineer, 行動應用開發, Mobile Developer, 作品集, Portfolio"
+    />
+    <link rel="canonical" href="https://jess-yen.web.app/" />
+
+    <!-- Open Graph(FB / LINE / Slack 等社群預覽卡片) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Jess Yen 個人網站" />
+    <meta
+      property="og:description"
+      content="Senior Android & Flutter Engineer — 7 年行動應用開發經驗,7 款上架 Google Play 的 App。"
+    />
+    <meta property="og:url" content="https://jess-yen.web.app/" />
+    <meta property="og:image" content="https://jess-yen.web.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:site_name" content="Jess Yen" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Jess Yen 個人網站" />
+    <meta
+      name="twitter:description"
+      content="Senior Android & Flutter Engineer — 7 年行動應用開發經驗,7 款上架 Google Play 的 App。"
+    />
+    <meta name="twitter:image" content="https://jess-yen.web.app/og-image.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Lato:wght@400;700;900&family=Gloria+Hallelujah&display=swap"
       rel="stylesheet"
     />
-    <title>Jess Yen 個人網站</title>
+
+    <!-- JSON-LD 結構化資料(Person):讓 Google 理解這是「一個人 / 履歷」 -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Jess Yen",
+        "jobTitle": "Senior Android & Flutter Engineer",
+        "email": "merukoo0507@gmail.com",
+        "url": "https://jess-yen.web.app/",
+        "description": "擁有 7 年行動應用開發經驗,已開發 7 款上架 Google Play 的 App。",
+        "knowsAbout": ["Android", "Flutter", "Kotlin", "Dart", "Mobile Development"],
+        "sameAs": [
+          "https://github.com/jess0507",
+          "https://www.linkedin.com/in/peishan-y-330411182/"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

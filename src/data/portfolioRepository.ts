@@ -1,37 +1,12 @@
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import staticPortfolio from './portfolio.json';
 import type { PortfolioData } from './types';
 
-// 資料位置:collection `config` / doc `portfolio` / 欄位 `data`
-const COLLECTION = 'config';
-const DOCUMENT = 'portfolio';
-const FIELD = 'data';
-
 /**
- * 從 Firestore 讀取並解析 portfolio 資料(對應 PortfolioRepository.load)。
- * `data` 欄位可能是 Map,也可能是存成 JSON 字串。
+ * 從打包進 bundle 的靜態 JSON 載入 portfolio(對應 Firestore `config/portfolio` 的內容)。
+ * 首屏即有資料、不需等網路,對 SEO / 首屏速度最有利。
  */
-export async function loadPortfolio(): Promise<PortfolioData> {
-  const snapshot = await getDoc(doc(db, COLLECTION, DOCUMENT));
-
-  if (!snapshot.exists()) {
-    throw new Error(`Firestore 文件 ${COLLECTION}/${DOCUMENT} 不存在`);
-  }
-
-  const raw = snapshot.data()?.[FIELD];
-
-  let data: unknown;
-  if (typeof raw === 'string') {
-    data = JSON.parse(raw);
-  } else if (raw && typeof raw === 'object') {
-    data = raw;
-  } else {
-    throw new Error(
-      `Firestore 文件 ${COLLECTION}/${DOCUMENT} 缺少 Map 或 JSON 字串型別的 \`${FIELD}\` 欄位`
-    );
-  }
-
-  return parsePortfolio(data as Record<string, unknown>);
+export async function loadPortfolioStatic(): Promise<PortfolioData> {
+  return parsePortfolio(staticPortfolio as Record<string, unknown>);
 }
 
 /** 將原始 JSON 物件轉成型別化的 PortfolioData。 */

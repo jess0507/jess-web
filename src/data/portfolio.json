@@ -1,0 +1,111 @@
+{
+  "links": {
+    "resumeGoogleDocs": "https://docs.google.com/document/d/1Bg5g0cCDWD2LYTocORKdNk08o4QtcGPit8YCrfIq-Pk/edit?usp=sharing",
+    "portfolioGoogleDocs": "https://docs.google.com/document/d/19IprPTxV_yZEW55SL0ugd0Nfm92q6GU0v1AkIcviebg/edit?usp=sharing"
+  },
+  "socials": [
+    {
+      "tag": "merukoo0507@gmail.com",
+      "icon": "envelope",
+      "url": "mailto:merukoo0507@gmail.com"
+    },
+    {
+      "tag": "peishan-y-330411182",
+      "icon": "linkedin",
+      "url": "https://www.linkedin.com/in/peishan-y-330411182/"
+    },
+    {
+      "tag": "jess0507",
+      "icon": "github",
+      "url": "https://github.com/jess0507"
+    }
+  ],
+  "skills": [
+    {
+      "category": "Language",
+      "list": ["Chinese (Mother language)", "English (Second language)"]
+    },
+    {
+      "category": "Program",
+      "list": ["Kotlin", "Dart", "Java", "Typescript"]
+    },
+    {
+      "category": "Tool",
+      "list": ["Firebase", "Git", "Github"]
+    },
+    {
+      "category": "Android",
+      "list": [
+        "MVVM",
+        "Hilt",
+        "Retrofit",
+        "Flow",
+        "Room",
+        "Compose",
+        "Material design",
+        "Darkmode",
+        "WebView"
+      ]
+    },
+    {
+      "category": "Flutter",
+      "list": [
+        "Riverpod",
+        "Go Route / Auto Route",
+        "Dio",
+        "Hive",
+        "Better Player",
+        "Photo Manager",
+        "Hooks",
+        "Fimber",
+        "Rxdart"
+      ]
+    },
+    {
+      "category": "Firebase",
+      "list": [
+        "FCM",
+        "Crashlytics",
+        "Social login",
+        "App Hosting",
+        "Store",
+        "Storage",
+        "Test Lab"
+      ]
+    },
+    {
+      "category": "CICD",
+      "list": ["GitHub action flow"]
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Daily Fantasy",
+      "subtitle": "Flutter App",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/jess-yen.firebasestorage.app/o/daily-fantasy-app-store-mobile.png?alt=media&token=271cd9c7-e9ad-4a19-b1c8-fa35fe18f71d",
+      "link": "https://docs.google.com/document/d/19IprPTxV_yZEW55SL0ugd0Nfm92q6GU0v1AkIcviebg/edit?tab=t.0#heading=h.2guyc2jqivfc"
+    },
+    {
+      "id": 2,
+      "title": "IDEKU KIOSK",
+      "subtitle": "Android App",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/jess-yen.firebasestorage.app/o/ideku-kiosk-google-play.png?alt=media&token=7c580aa8-f380-4b46-a7ea-3daf8ad23258",
+      "link": "https://docs.google.com/document/d/19IprPTxV_yZEW55SL0ugd0Nfm92q6GU0v1AkIcviebg/edit?tab=t.0#heading=h.4mtwzp1nrhvv"
+    },
+    {
+      "id": 3,
+      "title": "Moor",
+      "subtitle": "Android App",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/jess-yen.firebasestorage.app/o/moor-google-play.png?alt=media&token=56a69eb3-00b8-4686-b21c-8491b92c55ef",
+      "link": "https://docs.google.com/document/d/19IprPTxV_yZEW55SL0ugd0Nfm92q6GU0v1AkIcviebg/edit?tab=t.0#heading=h.chou3n21et7h"
+    },
+    {
+      "id": 4,
+      "title": "W. 采宸美學",
+      "subtitle": "Web",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/jess-yen.firebasestorage.app/o/wcaichen-demo.png?alt=media&token=e9dc529d-93de-4989-b11e-f3871ddd92f3",
+      "link": "https://docs.google.com/document/d/19IprPTxV_yZEW55SL0ugd0Nfm92q6GU0v1AkIcviebg/edit?tab=t.0#heading=h.bugpew3pjlpv"
+    }
+  ]
+}
