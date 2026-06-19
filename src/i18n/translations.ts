@@ -1,5 +1,3 @@
-// 翻譯字典(對應 Flutter 的 app_zh.arb / app_en.arb)。
-
 export type LocaleCode = 'zh' | 'en';
 
 export interface Translation {
@@ -38,7 +36,7 @@ export const translations: Record<LocaleCode, Translation> = {
     position: 'Senior Android & Flutter Engineer',
     aboutDev:
       '擁有 7 年豐富的行動應用程式經驗。\n已開發了 7 個在 Google Play 上發布的應用程式。',
-    buildBy: '使用Flutter建置，作者:',
+    buildBy: '使用React建置，作者:',
     jessYen: 'Jess Yen',
     madeIn: '製造於',
     withText: '和',
@@ -63,7 +61,7 @@ export const translations: Record<LocaleCode, Translation> = {
     position: 'Senior Android & Flutter Engineer',
     aboutDev:
       'Possessing 7 years of solid mobile app experience.\nHaving developed 7 apps published on google play. ',
-    buildBy: 'Built with Flutter by',
+    buildBy: 'Built with React by',
     jessYen: 'Jess Yen',
     madeIn: 'Made in',
     withText: 'with',
