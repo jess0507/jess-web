@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { readFileSync } from 'node:fs';
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 // 從 package.json 取版本號,build 時注入為 __APP_VERSION__
 const pkg = JSON.parse(
   readFileSync(new URL('./package.json', import.meta.url), 'utf-8')
@@ -10,7 +12,7 @@ const pkg = JSON.parse(
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
+  plugins: [react(), tsconfigPaths(), cloudflare()],
   define: {
     __APP_VERSION__: JSON.stringify(pkg.version),
   },
