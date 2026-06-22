@@ -3,13 +3,36 @@
 // 目的:讓「不跑 JS」的爬蟲(社群預覽、Bing、LINE、FB 等)也能在原始 HTML 看到正文。
 // 資料已靜態化(src/data/portfolio.json),首屏即會渲染,因此這步單純可靠。
 import { preview } from 'vite';
-import puppeteer from 'puppeteer';
 import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const DIST_INDEX = resolve('dist/index.html');
 // 等到專案卡片真正渲染出來(只有資料載入後才會有 main 內的 <img>)
 const CONTENT_SELECTOR = 'main button img';
+
+// 依環境取得瀏覽器:
+// - Linux(Cloudflare Pages / CI 等精簡環境)用 @sparticuz/chromium,
+//   它自帶 Chromium 執行所需的共享函式庫(libatk 等),不依賴系統套件。
+// - 其他平台(本機 macOS / Windows)沿用一般 puppeteer 內建的 Chrome。
+async function launchBrowser() {
+  if (process.platform === 'linux') {
+    const { default: chromium } = await import('@sparticuz/chromium');
+    const { default: puppeteer } = await import('puppeteer-core');
+    // 預渲染只需要 DOM,不需要 WebGL/圖形,關掉以降低函式庫需求
+    chromium.setGraphicsMode = false;
+    return puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+      headless: true,
+    });
+  }
+
+  const { default: puppeteer } = await import('puppeteer');
+  return puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
+}
 
 async function run() {
   // 1. 起一個只服務 dist/ 的本機預覽伺服器
@@ -18,10 +41,7 @@ async function run() {
   });
   const url = server.resolvedUrls?.local?.[0] ?? 'http://localhost:4173/';
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
+  const browser = await launchBrowser();
 
   try {
     const page = await browser.newPage();
