@@ -1,66 +1,42 @@
-// Build 後預渲染:用 vite preview 起本機伺服器,puppeteer 跑一遍頁面,
-// 把 React 渲染完成的 DOM 寫回 dist/index.html。
+// Build 後預渲染:用 Vite SSR(react-dom/server)把 App 渲染成 HTML,
+// 注入 dist/index.html 的 #root。資料已靜態化(src/data/portfolio.json),
+// 首次渲染即含完整內容,因此這步單純可靠。
 // 目的:讓「不跑 JS」的爬蟲(社群預覽、Bing、LINE、FB 等)也能在原始 HTML 看到正文。
-// 資料已靜態化(src/data/portfolio.json),首屏即會渲染,因此這步單純可靠。
-import { preview } from 'vite';
-import { writeFileSync } from 'node:fs';
+// 不依賴瀏覽器,任何環境(Cloudflare Pages 等精簡 Linux)都能執行。
+import { createServer } from 'vite';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const DIST_INDEX = resolve('dist/index.html');
-// 等到專案卡片真正渲染出來(只有資料載入後才會有 main 內的 <img>)
-const CONTENT_SELECTOR = 'main button img';
-
-// 依環境取得瀏覽器:
-// - Linux(Cloudflare Pages / CI 等精簡環境)用 @sparticuz/chromium,
-//   它自帶 Chromium 執行所需的共享函式庫(libatk 等),不依賴系統套件。
-// - 其他平台(本機 macOS / Windows)沿用一般 puppeteer 內建的 Chrome。
-async function launchBrowser() {
-  if (process.platform === 'linux') {
-    const { default: chromium } = await import('@sparticuz/chromium');
-    const { default: puppeteer } = await import('puppeteer-core');
-    // 預渲染只需要 DOM,不需要 WebGL/圖形,關掉以降低函式庫需求
-    chromium.setGraphicsMode = false;
-    return puppeteer.launch({
-      args: chromium.args,
-      executablePath: await chromium.executablePath(),
-      headless: true,
-    });
-  }
-
-  const { default: puppeteer } = await import('puppeteer');
-  return puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
-}
+const ROOT_DIV = '<div id="root"></div>';
 
 async function run() {
-  // 1. 起一個只服務 dist/ 的本機預覽伺服器
-  const server = await preview({
-    preview: { port: 4173, strictPort: false, open: false },
+  // 以中介模式起 Vite,只用它的 SSR 模組載入能力(處理 TS/JSX/alias/define)
+  const vite = await createServer({
+    appType: 'custom',
+    server: { middlewareMode: true },
+    logLevel: 'warn',
   });
-  const url = server.resolvedUrls?.local?.[0] ?? 'http://localhost:4173/';
-
-  const browser = await launchBrowser();
 
   try {
-    const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-    // 等正文渲染(資料載入 → 專案卡片出現)
-    await page.waitForSelector(CONTENT_SELECTOR, { timeout: 30000 });
-
-    const rendered = await page.content();
+    const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
+    const appHtml = render();
 
     // 保險:確認真的抓到正文,避免把空殼寫回去
-    if (!rendered.includes('<main')) {
+    if (!appHtml.includes('<main')) {
       throw new Error('預渲染結果不含 <main>,放棄寫入');
     }
 
-    writeFileSync(DIST_INDEX, rendered, 'utf-8');
+    const template = readFileSync(DIST_INDEX, 'utf-8');
+    if (!template.includes(ROOT_DIV)) {
+      throw new Error(`找不到注入點 ${ROOT_DIV},放棄寫入`);
+    }
+
+    const html = template.replace(ROOT_DIV, `<div id="root">${appHtml}</div>`);
+    writeFileSync(DIST_INDEX, html, 'utf-8');
     console.log(`✓ 預渲染完成,已寫入 ${DIST_INDEX}`);
   } finally {
-    await browser.close();
-    await server.httpServer.close();
+    await vite.close();
   }
 }
 

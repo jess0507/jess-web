@@ -2,12 +2,11 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useState,
   type ReactNode,
 } from 'react';
-import { loadPortfolioStatic } from './portfolioRepository';
-import { emptyPortfolio, type PortfolioData } from './types';
+import { loadPortfolioStatic, loadPortfolioStaticSync } from './portfolioRepository';
+import { type PortfolioData } from './types';
 
 interface PortfolioState {
   /** 已載入的資料;載入中或錯誤時為空狀態,供 UI 安全渲染。 */
@@ -20,12 +19,13 @@ interface PortfolioState {
 const PortfolioContext = createContext<PortfolioState | null>(null);
 
 /**
- * 持有 portfolio 顯示資料,掛載時從靜態 JSON 載入。
+ * 持有 portfolio 顯示資料。資料已內嵌於 bundle,故同步載入為初始值,
+ * 讓首次渲染(含 build 時 SSR 預渲染)即有完整內容。
  * 對應 Flutter 的 portfolioProvider(AsyncNotifier)。
  */
 export function PortfolioProvider({ children }: { children: ReactNode }) {
-  const [data, setData] = useState<PortfolioData>(emptyPortfolio);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<PortfolioData>(loadPortfolioStaticSync);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   const refresh = useCallback(async () => {
@@ -39,10 +39,6 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
       setLoading(false);
     }
   }, []);
-
-  useEffect(() => {
-    void refresh();
-  }, [refresh]);
 
   return (
     <PortfolioContext.Provider value={{ data, loading, error, refresh }}>

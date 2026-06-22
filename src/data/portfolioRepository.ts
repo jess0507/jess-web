@@ -2,11 +2,19 @@ import staticPortfolio from './portfolio.json';
 import type { PortfolioData } from './types';
 
 /**
+ * 同步從打包進 bundle 的靜態 JSON 解析 portfolio。
+ * 因資料已內嵌、無需等網路,可用於 state 初始值,讓首次渲染(含 SSR 預渲染)即有資料。
+ */
+export function loadPortfolioStaticSync(): PortfolioData {
+  return parsePortfolio(staticPortfolio as Record<string, unknown>);
+}
+
+/**
  * 從打包進 bundle 的靜態 JSON 載入 portfolio(對應 Firestore `config/portfolio` 的內容)。
  * 首屏即有資料、不需等網路,對 SEO / 首屏速度最有利。
  */
 export async function loadPortfolioStatic(): Promise<PortfolioData> {
-  return parsePortfolio(staticPortfolio as Record<string, unknown>);
+  return loadPortfolioStaticSync();
 }
 
 /** 將原始 JSON 物件轉成型別化的 PortfolioData。 */
