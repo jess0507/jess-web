@@ -21,8 +21,8 @@ export function ProjectPage() {
     <div
       className={
         isMobile
-          ? 'flex flex-col items-center gap-10'
-          : 'flex flex-wrap justify-evenly gap-x-8 gap-y-1'
+          ? 'flex flex-col items-start gap-10'
+          : 'flex flex-wrap justify-start gap-x-8 gap-y-10'
       }
     >
       {data.projects.map((project) => (

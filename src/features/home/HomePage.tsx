@@ -38,7 +38,7 @@ export function HomePage() {
       </section>
 
       <div className="h-10" />
-      <div className="w-full px-5 md:px-[50px]">
+      <div className="w-full px-[10vw] md:px-[15vw]">
         <ProjectPage />
       </div>
 
