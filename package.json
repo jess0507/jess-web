@@ -6,11 +6,12 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && npm run prerender",
+    "build": "tsc && vite build && npm run prerender && npm run sitemap",
     "prerender": "node scripts/prerender.mjs",
     "preview": "vite preview",
     "lint": "eslint src --ext .ts,.tsx",
-    "deploy": "npm run build && firebase deploy --only hosting"
+    "deploy": "npm run build && firebase deploy --only hosting",
+    "sitemap": "node scripts/update-sitemap.mjs"
   },
   "dependencies": {
     "firebase": "^10.12.2",
