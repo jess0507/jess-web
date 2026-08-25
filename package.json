@@ -1,6 +1,6 @@
 {
   "name": "jess-react-web",
-  "version": "3.0.0",
+  "version": "1.0.0",
   "description": "Jess's web(Vite + React + TypeScript + Firebase)",
   "type": "module",
   "private": true,

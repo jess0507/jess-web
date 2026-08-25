@@ -8,8 +8,8 @@ import { WebNavigationBar } from './WebNavigationBar';
 import { MobileNavBar, AppDrawer } from './MobileNav';
 import { navItemsData } from './navItems';
 
-// build 時注入,對應 VersionService.getDisplayVersion 的 v{version}
-const APP_VERSION = `v${__APP_VERSION__}`;
+// build 時由 git tag 注入(例:3.1.0),不加 v 前綴
+const APP_VERSION = __APP_VERSION__;
 
 /**
  * 主框架:頂部導覽(RWD)+ 單頁捲動內容 + 版本標籤。

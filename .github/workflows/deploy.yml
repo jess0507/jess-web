@@ -1,10 +1,16 @@
 name: Deploy to Firebase Hosting
 
+# 只有 push tag 才部署;一般推 master 不會觸發
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
   workflow_dispatch:
+
+# 連續 push 多個 tag 時,避免兩個 deploy 互相覆蓋
+concurrency:
+  group: deploy-hosting
+  cancel-in-progress: false
 
 jobs:
   build_and_deploy:
@@ -12,6 +18,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # 版本號取自 git tag,需完整歷史與 tag
+          fetch-depth: 0
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -41,7 +50,12 @@ jobs:
           VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
           VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
-        run: npm run build
+        # 版本號取自最近的 git tag(3.1.0 → 顯示 3.1.0);容錯:tag 若帶 v 前綴會去掉
+        run: |
+          TAG="$(git describe --tags --abbrev=0 2>/dev/null || echo 0.0.0)"
+          export APP_VERSION="${TAG#v}"
+          echo "Building APP_VERSION=$APP_VERSION"
+          npm run build
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
