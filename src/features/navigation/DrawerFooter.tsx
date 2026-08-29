@@ -2,6 +2,7 @@ import { FaHeart } from 'react-icons/fa6';
 import { useLocale } from '@/i18n/LocaleContext';
 import { usePortfolio } from '@/data/PortfolioContext';
 import { SocialIconsRow } from '@/components/SocialIcons';
+import { PageViewCounter } from '@/features/version/PageViewCounter';
 
 /** 行動版抽屜底部:社群圖示與「Made in Taiwan」署名(對應 DrawerFooter)。 */
 export function DrawerFooter() {
@@ -29,6 +30,8 @@ export function DrawerFooter() {
         {t.withText}
         <FaHeart size={12} className="text-brandred" />
       </p>
+
+      <PageViewCounter className="text-xs font-medium text-text2" />
     </div>
   );
 }

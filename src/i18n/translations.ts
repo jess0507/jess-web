@@ -24,6 +24,7 @@ export interface Translation {
   mySkills: string;
   whatMyDesignSkillsInclude: string;
   skillsSubtitle: string;
+  totalViews: string;
 }
 
 export const translations: Record<LocaleCode, Translation> = {
@@ -52,6 +53,7 @@ export const translations: Record<LocaleCode, Translation> = {
     mySkills: '技能樹',
     whatMyDesignSkillsInclude: '軟體程式技術',
     skillsSubtitle: '在開發軟體或應用程式時，經常用到的程式語言或工具。',
+    totalViews: '總瀏覽次數',
   },
   en: {
     appTitle: 'Jess Yen Web',
@@ -80,6 +82,7 @@ export const translations: Record<LocaleCode, Translation> = {
     whatMyDesignSkillsInclude: 'What My Design Skills Include',
     skillsSubtitle:
       'These are the skills and tools I frequently use in development.',
+    totalViews: 'Total views',
   },
 };
 

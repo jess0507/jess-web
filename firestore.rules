@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 網站設定(portfolio 等):公開唯讀
+    match /config/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+    // 統計數字(stats/pageviews):公開唯讀,只由 Cloud Function(admin)寫入
+    match /stats/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

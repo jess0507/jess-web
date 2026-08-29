@@ -50,6 +50,7 @@ jobs:
           VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
           VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
+          VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}
         # 版本號取自最近的 git tag(3.1.0 → 顯示 3.1.0);容錯:tag 若帶 v 前綴會去掉
         run: |
           TAG="$(git describe --tags --abbrev=0 2>/dev/null || echo 0.0.0)"
