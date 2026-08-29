@@ -31,7 +31,7 @@ export function DrawerFooter() {
         <FaHeart size={12} className="text-brandred" />
       </p>
 
-      <PageViewCounter className="text-xs font-medium text-text2" />
+      <PageViewCounter className="items-center text-xs font-medium text-text2" />
     </div>
   );
 }

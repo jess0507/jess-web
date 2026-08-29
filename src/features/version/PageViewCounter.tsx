@@ -1,32 +1,33 @@
-import { FaEye } from 'react-icons/fa6';
+import { FaEye, FaUser } from 'react-icons/fa6';
 import { useLocale } from '@/i18n/LocaleContext';
 import { usePageViews } from '@/hooks/usePageViews';
 
 /**
- * 顯示 GA4 歷史總瀏覽次數(資料來源:Firestore `stats/pageviews`)。
- * 尚未載入或讀取失敗時不佔版面。
+ * 顯示 GA4 歷史總瀏覽次數與使用者數(資料來源:Firestore `stats/pageviews`),
+ * 瀏覽數與使用者數各一行。尚未載入或讀取失敗時不佔版面。
  */
 export function PageViewCounter({ className = '' }: { className?: string }) {
   const { t, locale } = useLocale();
   const stats = usePageViews();
   if (!stats) return null;
 
-  const formatted = stats.pageViews.toLocaleString(
-    locale === 'zh' ? 'zh-Hant-TW' : 'en-US'
-  );
+  const fmt = (n: number) =>
+    n.toLocaleString(locale === 'zh' ? 'zh-Hant-TW' : 'en-US');
+  const views = t.totalViews.replace('{n}', fmt(stats.pageViews));
+  const users = t.totalUsers.replace('{n}', fmt(stats.users));
 
   return (
     <span
-      className={`inline-flex items-center gap-1 ${className}`}
-      title={
-        stats.updatedAt
-          ? `${t.totalViews} · ${stats.updatedAt.toLocaleString()}`
-          : t.totalViews
-      }
+      className={`inline-flex flex-col gap-0.5 ${className}`}
+      title={stats.updatedAt ? stats.updatedAt.toLocaleString() : undefined}
     >
-      <FaEye size={12} aria-hidden />
-      <span>
-        {t.totalViews} {formatted}
+      <span className="inline-flex items-center gap-1">
+        <FaEye size={12} aria-hidden />
+        {views}
+      </span>
+      <span className="inline-flex items-center gap-1">
+        <FaUser size={11} aria-hidden />
+        {users}
       </span>
     </span>
   );
