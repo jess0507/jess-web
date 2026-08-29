@@ -1,8 +1,9 @@
 // 對應 Firestore config/portfolio 文件 data 欄位的型別定義。
 
-/** 外部文件連結(履歷 / 作品集)。 */
+/** 外部文件連結(英文履歷 / 中文履歷 / 作品集)。 */
 export interface ShareLinks {
-  resumeGoogleDocs: string;
+  resumeEn: string;
+  resumeZh: string;
   portfolioGoogleDocs: string;
 }
 
@@ -40,7 +41,7 @@ export interface PortfolioData {
 
 /** 資料載入前使用的空狀態。 */
 export const emptyPortfolio: PortfolioData = {
-  links: { resumeGoogleDocs: '', portfolioGoogleDocs: '' },
+  links: { resumeEn: '', resumeZh: '', portfolioGoogleDocs: '' },
   socials: [],
   skills: [],
   projects: [],

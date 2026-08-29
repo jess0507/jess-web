@@ -5,7 +5,8 @@ export interface Translation {
   logo: string;
   home: string;
   portfolio: string;
-  resume: string;
+  resumeEn: string;
+  resumeZh: string;
   intro: string;
   position: string;
   aboutDev: string;
@@ -31,7 +32,8 @@ export const translations: Record<LocaleCode, Translation> = {
     logo: 'Jess Yen',
     home: '首頁',
     portfolio: '作品集',
-    resume: '履歷',
+    resumeEn: '英文履歷',
+    resumeZh: '中文履歷',
     intro: '你好! 我是Jess Yen',
     position: 'Senior Android & Flutter Engineer',
     aboutDev:
@@ -56,7 +58,8 @@ export const translations: Record<LocaleCode, Translation> = {
     logo: 'Jess Yen',
     home: 'Home',
     portfolio: 'Portfolio',
-    resume: 'Resume',
+    resumeEn: 'English Resume',
+    resumeZh: '中文履歷',
     intro: "Hi! I'm Jess -",
     position: 'Senior Android & Flutter Engineer',
     aboutDev:

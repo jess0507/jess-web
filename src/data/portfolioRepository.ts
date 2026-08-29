@@ -22,7 +22,8 @@ function parsePortfolio(json: Record<string, unknown>): PortfolioData {
   const links = (json.links ?? {}) as Record<string, unknown>;
   return {
     links: {
-      resumeGoogleDocs: String(links.resumeGoogleDocs ?? ''),
+      resumeEn: String(links.resumeEn ?? ''),
+      resumeZh: String(links.resumeZh ?? ''),
       portfolioGoogleDocs: String(links.portfolioGoogleDocs ?? ''),
     },
     socials: ((json.socials as unknown[]) ?? []).map((e) => {

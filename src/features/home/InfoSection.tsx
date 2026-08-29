@@ -26,7 +26,8 @@ export function InfoSection() {
 
       <div className="mt-9">
         <InfoActionButtons
-          resumeLink={data.links.resumeGoogleDocs}
+          resumeEnLink={data.links.resumeEn}
+          resumeZhLink={data.links.resumeZh}
           portfolioLink={data.links.portfolioGoogleDocs}
         />
       </div>
