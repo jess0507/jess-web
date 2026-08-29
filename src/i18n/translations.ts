@@ -59,7 +59,7 @@ export const translations: Record<LocaleCode, Translation> = {
     home: 'Home',
     portfolio: 'Portfolio',
     resumeEn: 'English Resume',
-    resumeZh: '中文履歷',
+    resumeZh: 'Chinese Resume',
     intro: "Hi! I'm Jess -",
     position: 'Senior Android & Flutter Engineer',
     aboutDev:
