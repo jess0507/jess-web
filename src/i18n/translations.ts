@@ -16,6 +16,8 @@ export interface Translation {
   withText: string;
   emailLabel: string;
   email: string;
+  telegramLabel: string;
+  telegram: string;
   projects: string;
   skills: string;
   myWorks: string;
@@ -39,13 +41,15 @@ export const translations: Record<LocaleCode, Translation> = {
     intro: '你好! 我是Jess Yen',
     position: 'Senior Android & Flutter Engineer',
     aboutDev:
-      '擁有 7 年豐富的行動應用程式經驗。\n已開發了 7 個在 Google Play 上發布的應用程式。',
+      '擁有 8 年豐富的行動應用程式經驗。\n已開發了 7 個在 Google Play 上發布的應用程式。',
     buildBy: '使用React建置，作者:',
     jessYen: 'Jess Yen',
     madeIn: '製造於',
     withText: '和',
     emailLabel: 'Email:',
     email: 'merukoo0507@gmail.com',
+    telegramLabel: 'Telegram:',
+    telegram: '@jess11205',
     projects: '專案',
     skills: '技術',
     myWorks: '作品集',
@@ -67,13 +71,15 @@ export const translations: Record<LocaleCode, Translation> = {
     intro: "Hi! I'm Jess -",
     position: 'Senior Android & Flutter Engineer',
     aboutDev:
-      'Possessing 7 years of solid mobile app experience.\nHaving developed 7 apps published on google play. ',
+      'Possessing 8 years of solid mobile app experience.\nHaving developed 7 apps published on google play. ',
     buildBy: 'Built with React by',
     jessYen: 'Jess Yen',
     madeIn: 'Made in',
     withText: 'with',
     emailLabel: 'Email:',
     email: 'merukoo0507@gmail.com',
+    telegramLabel: 'Telegram:',
+    telegram: '@jess11205',
     projects: 'Projects',
     skills: 'Skills',
     myWorks: 'my works',

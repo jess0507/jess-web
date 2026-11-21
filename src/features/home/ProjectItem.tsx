@@ -23,7 +23,8 @@ export function ProjectItem({
   return (
     <div
       className="relative overflow-hidden bg-brandgrey-100"
-      style={{ width, height }}
+      // maxWidth 讓卡片在窄螢幕(手機)縮到容器寬度,避免撐出橫向捲動
+      style={{ width, maxWidth: '100%', height }}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >

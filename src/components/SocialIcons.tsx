@@ -1,5 +1,11 @@
 import type { IconType } from 'react-icons';
-import { FaEnvelope, FaLinkedinIn, FaGithub, FaLink } from 'react-icons/fa6';
+import {
+  FaEnvelope,
+  FaLinkedinIn,
+  FaGithub,
+  FaLink,
+  FaTelegram,
+} from 'react-icons/fa6';
 import { logEvent } from '@/services/analytics';
 import { openUrlLink } from '@/lib/utils';
 import type { SocialItem } from '@/data/types';
@@ -7,6 +13,7 @@ import type { SocialItem } from '@/data/types';
 // 對應 Flutter SocialItem._iconMap
 const iconMap: Record<string, IconType> = {
   envelope: FaEnvelope,
+  telegram: FaTelegram,
   linkedin: FaLinkedinIn,
   github: FaGithub,
 };

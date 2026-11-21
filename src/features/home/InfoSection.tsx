@@ -19,10 +19,15 @@ export function InfoSection() {
         {t.aboutDev}
       </p>
 
-      <p className="mt-9 font-mono text-base font-bold text-ink">
-        {t.emailLabel}
+      <p className="mt-9 flex flex-wrap items-baseline gap-x-2 text-base">
+        <span className="font-mono font-bold text-ink">{t.emailLabel}</span>
+        <span className="select-text text-text2">{t.email}</span>
       </p>
-      <p className="select-text text-base text-text2">{t.email}</p>
+
+      <p className="mt-2 flex flex-wrap items-baseline gap-x-2 text-base">
+        <span className="font-mono font-bold text-ink">{t.telegramLabel}</span>
+        <span className="select-text text-text2">{t.telegram}</span>
+      </p>
 
       <div className="mt-9">
         <InfoActionButtons
